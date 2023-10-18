@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+using NetCoreTask.DataBase.Abstraction;
+
 namespace NetCoreTask.DataBase.Entities;
 
-public class StudentEntity
+public class StudentEntity : IEntity
 {
     [Key]
     public int Id { get; set; }

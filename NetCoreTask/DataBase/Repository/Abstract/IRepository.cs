@@ -1,10 +1,12 @@
-﻿namespace NetCoreTask.DataBase.Repository.Abstract;
+﻿using System.Security.Principal;
 
-public interface IRepository<TEntity> where TEntity : class
+namespace NetCoreTask.DataBase.Repository.Abstract;
+
+public interface IRepository<T> where T : class
 {
-    Task<TEntity> GetByIdAsync(int id);
-    Task<IEnumerable<TEntity>> GetAllAsync();
-    Task<TEntity> AddAsync(TEntity entity);
-    Task<TEntity> UpdateAsync(TEntity entity);
-    Task<bool> DeleteAsync(int id);
+    Task<List<T>> GetAll();
+    Task<T> GetById(int id);
+    Task<T> Add(T entity);
+    Task<T> Update(T entity);
+    Task<T> Delete(int id);
 }

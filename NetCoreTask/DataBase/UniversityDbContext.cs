@@ -4,9 +4,9 @@ using NetCoreTask.Extensions;
 
 namespace NetCoreTask.DataBase;
 
-public class UniveristyDbContext : DbContext
+public class UniversityDbContext : DbContext
 {
-    public UniveristyDbContext(DbContextOptions<UniveristyDbContext> options)
+    public UniversityDbContext(DbContextOptions<UniversityDbContext> options)
         : base(options)
     {
     }

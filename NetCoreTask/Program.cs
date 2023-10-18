@@ -1,9 +1,8 @@
-using System.Globalization;
-
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 
 using NetCoreTask.DataBase;
+using NetCoreTask.DataBase.Repository;
+using NetCoreTask.DataBase.Repository.Abstract;
 
 namespace NetCoreTask;
 
@@ -20,10 +19,19 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
+        builder.Services.AddControllersWithViews()
+            .AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
         var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-        builder.Services.AddDbContext<UniveristyDbContext>(config =>
+        builder.Services.AddDbContext<UniversityDbContext>(config =>
             config.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+
+        builder.Services.AddScoped<IStudentRepository, StudentsRepository>();
+        builder.Services.AddScoped<ITeacherRepository, TeacherRepository>();
+        builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+
 
         var app = builder.Build();
 
