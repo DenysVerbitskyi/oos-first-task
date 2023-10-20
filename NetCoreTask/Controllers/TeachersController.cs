@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
 using NetCoreTask.Models;
 using NetCoreTask.Services.Abstractions;
 

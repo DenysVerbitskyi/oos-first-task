@@ -1,10 +1,10 @@
 ﻿namespace NetCoreTask.Services.Abstractions;
 
-public interface IApiService<T>
+public interface IApiService<TDomain>
 {
-    Task<List<T>> GetAll();
-    Task<T> GetById(Guid id);
-    Task<T> Add(T entity);
-    Task<T> Update(T entity);
-    Task<T> Delete(Guid id);
+    Task<List<TDomain>> GetAll();
+    Task<TDomain> GetById(Guid id);
+    Task<TDomain> Add(TDomain entity);
+    Task<TDomain> Update(TDomain entity);
+    Task<TDomain> Delete(Guid id);
 }
