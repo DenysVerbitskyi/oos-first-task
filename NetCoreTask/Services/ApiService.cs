@@ -36,7 +36,7 @@ public abstract class ApiService<TEntity, TDto> : IApiService<TDto>
         return course.Adapt<TDto>();
     }
 
-    public virtual async Task<TDto> Delete(int id)
+    public virtual async Task<TDto> Delete(Guid id)
     {
         _logger.LogDebug($"Started deleting {_entityName} with id:{id}");
 
@@ -58,7 +58,7 @@ public abstract class ApiService<TEntity, TDto> : IApiService<TDto>
         return courses.Adapt<List<TDto>>();
     }
 
-    public virtual async Task<TDto> GetById(int id)
+    public virtual async Task<TDto> GetById(Guid id)
     {
         _logger.LogDebug($"Started getting {_entityName} with id:{id} from database");
 

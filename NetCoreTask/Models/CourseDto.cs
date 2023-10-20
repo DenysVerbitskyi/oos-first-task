@@ -5,8 +5,8 @@ namespace NetCoreTask.Models;
 
 public class CourseDto : IDto
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid();
     public string CourseName { get; set; }
     public string Description { get; set; }
-    public int TeacherId { get; set; }
+    public Guid TeacherId { get; set; }
 }

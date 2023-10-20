@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-using NetCoreTask.DataBase.Entities;
-using NetCoreTask.DataBase.Repository.Abstract;
 using NetCoreTask.Models;
 using NetCoreTask.Services.Abstractions;
 
@@ -38,7 +36,7 @@ namespace NetCoreTask.Controllers
         /// <param name="id">The course's id.</param>
         /// <returns>The <see cref="CourseDto"/> that was found or null.</returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult<CourseDto>> GetCourseById(int id)
+        public async Task<ActionResult<CourseDto>> GetCourseById(Guid id)
         {
             var course = await _service.GetById(id);
             if (course == null)
@@ -55,7 +53,7 @@ namespace NetCoreTask.Controllers
         /// <param name="id">Course's Id.</param>
         /// <returns>Action result</returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> EditCourse(int id, CourseDto course)
+        public async Task<IActionResult> EditCourse(Guid id, CourseDto course)
         {
             if (id != course.Id)
             {
@@ -85,7 +83,7 @@ namespace NetCoreTask.Controllers
         /// <param name="id">The course's id.</param>
         /// <returns>If deletion was successful, the result will be Status Code 204.</returns>
         [HttpDelete("{id}")]
-        public async Task<ActionResult<CourseDto>> Delete(int id)
+        public async Task<ActionResult<CourseDto>> Delete(Guid id)
         {
             var course = await _service.Delete(id);
             if (course == null)

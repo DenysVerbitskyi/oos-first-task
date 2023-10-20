@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 using NetCoreTask.DataBase.Abstraction;
 
@@ -7,7 +8,8 @@ namespace NetCoreTask.DataBase.Entities;
 public class TeacherEntity : IEntity
 {
     [Key]
-    public int Id { get; set; }
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public Guid Id { get; set; }
 
     [Required(ErrorMessage = "FirstName is required")]
     [MaxLength(50)]

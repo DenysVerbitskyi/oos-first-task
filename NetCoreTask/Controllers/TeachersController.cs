@@ -1,9 +1,5 @@
-﻿using Mapster;
+﻿using Microsoft.AspNetCore.Mvc;
 
-using Microsoft.AspNetCore.Mvc;
-
-using NetCoreTask.DataBase.Entities;
-using NetCoreTask.DataBase.Repository.Abstract;
 using NetCoreTask.Models;
 using NetCoreTask.Services.Abstractions;
 
@@ -40,7 +36,7 @@ namespace NetCoreTask.Controllers
         /// <param name="id">The teacher's id.</param>
         /// <returns>The <see cref="TheacerDto"/> that was found or null.</returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult<TeacherDto>> GetTeacherById(int id)
+        public async Task<ActionResult<TeacherDto>> GetTeacherById(Guid id)
         {
             var teacher = await _service.GetById(id);
             if (teacher == null)
@@ -57,7 +53,7 @@ namespace NetCoreTask.Controllers
         /// <param name="id">Teacher's Id.</param>
         /// <returns>Action result</returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> EditTeacher(int id, TeacherDto teacher)
+        public async Task<IActionResult> EditTeacher(Guid id, TeacherDto teacher)
         {
             if (id != teacher.Id)
             {
@@ -87,7 +83,7 @@ namespace NetCoreTask.Controllers
         /// <param name="id">The teacher's id.</param>
         /// <returns>If deletion was successful, the result will be Status Code 204.</returns>
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult> Delete(Guid id)
         {
             var teacher = await _service.Delete(id);
             if (teacher == null)

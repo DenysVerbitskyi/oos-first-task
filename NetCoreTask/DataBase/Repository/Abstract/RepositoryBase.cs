@@ -22,7 +22,7 @@ namespace NetCoreTask.DataBase.Repository.Abstract
             return entity;
         }
 
-        public async Task<TEntity> Delete(int id)
+        public async Task<TEntity> Delete(Guid id)
         {
             var entity = await _dbSet.FindAsync(id).ConfigureAwait(false);
             if (entity == null)
@@ -36,7 +36,7 @@ namespace NetCoreTask.DataBase.Repository.Abstract
             return entity;
         }
 
-        public virtual async Task<TEntity> GetById(int id)
+        public virtual async Task<TEntity> GetById(Guid id)
         {
             var entity = await _dbSet.FindAsync(id).ConfigureAwait(false);
 

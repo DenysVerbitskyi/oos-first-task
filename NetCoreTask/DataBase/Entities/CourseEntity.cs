@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 using NetCoreTask.DataBase.Abstraction;
 
@@ -6,8 +7,8 @@ namespace NetCoreTask.DataBase.Entities;
 
 public class CourseEntity : IEntity
 {
-    [Key]
-    public int Id { get; set; }
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public Guid Id { get; set; }
 
     [Required(ErrorMessage = "Course name is required")]
     [MaxLength(50)]
@@ -17,8 +18,7 @@ public class CourseEntity : IEntity
     [MaxLength(300, ErrorMessage = "Course description maximum length must be 300 symbols")]
     public string Description { get; set; }
 
-    [Required]
-    public int TeacherId { get; set; }
+    public Guid TeacherId { get; set; }
 
     public virtual TeacherEntity Teacher { get; set; }
     public virtual ICollection<StudentCoursesEntity> StudentCourses { get; set; }

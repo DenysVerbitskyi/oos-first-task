@@ -1,7 +1,6 @@
 ﻿using NetCoreTask.DataBase.Entities;
 using NetCoreTask.DataBase.Repository.Abstract;
 using NetCoreTask.Models;
-using NetCoreTask.Services.Abstractions;
 
 namespace NetCoreTask.Services;
 

@@ -2,5 +2,5 @@
 
 public interface IDto
 {
-    int Id { get; set; }
+    Guid Id { get; set; }
 }

@@ -1,9 +1,7 @@
-﻿using Mapster;
+﻿using Microsoft.EntityFrameworkCore;
 
-using Microsoft.EntityFrameworkCore;
 using NetCoreTask.DataBase.Entities;
 using NetCoreTask.DataBase.Repository.Abstract;
-using NetCoreTask.Models;
 
 namespace NetCoreTask.DataBase.Repository.Services;
 
@@ -16,7 +14,7 @@ public class CoursesRepository : RepositoryBase<CourseEntity, UniversityDbContex
         _context = context;
     }
 
-    public override async Task<CourseEntity> GetById(int id)
+    public override async Task<CourseEntity> GetById(Guid id)
     {
         return await _context.Courses
             .Include(c => c.Teacher)

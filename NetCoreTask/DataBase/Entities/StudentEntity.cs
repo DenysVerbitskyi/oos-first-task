@@ -8,7 +8,8 @@ namespace NetCoreTask.DataBase.Entities;
 public class StudentEntity : IEntity
 {
     [Key]
-    public int Id { get; set; }
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public Guid Id { get; set; }
 
     [Required(ErrorMessage = "FirstName is required")]
     [MaxLength(50)]

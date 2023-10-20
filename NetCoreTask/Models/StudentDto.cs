@@ -4,7 +4,7 @@ namespace NetCoreTask.Models;
 
 public class StudentDto : IDto
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid();
 
     public string FirstName { get; set; }
 

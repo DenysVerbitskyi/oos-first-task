@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 using NetCoreTask.DataBase.Abstraction;
 
@@ -6,9 +6,10 @@ namespace NetCoreTask.DataBase.Entities;
 
 public class StudentCoursesEntity : IEntity
 {
-    public int Id { get; set; }
-    public int StudentId { get; set; }
-    public int CourseId { get; set; }
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public Guid Id { get; set; }
+    public Guid StudentId { get; set; }
+    public Guid CourseId { get; set; }
 
     public StudentEntity Student { get; set; }
     public virtual CourseEntity Course { get; set; }

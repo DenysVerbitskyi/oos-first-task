@@ -1,8 +1,5 @@
-using Mapster;
-
 using Microsoft.EntityFrameworkCore;
 
-using NetCoreTask.Client.Services;
 using NetCoreTask.DataBase;
 using NetCoreTask.DataBase.Entities;
 using NetCoreTask.DataBase.Repository.Abstract;
