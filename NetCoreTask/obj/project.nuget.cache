@@ -1,10 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "9w7ZViiwVCyCKaBIsrrByxnbNJzhlB4rlg/WYppEF380IzBIMQN27BOL8a6rPoVgqS9a9NcCzk9n9yKcKV4HXg==",
+  "dgSpecHash": "VFG9Cjr9vx1zBGjOWs9q93kdBdbV4GeH84w48/m4n8MHlM1GslWhFKuQuLlASu/U17jsvmClwWz0iVSUjD3IUg==",
   "success": true,
   "projectFilePath": "C:\\Users\\denis\\source\\repos\\oos-first-task\\NetCoreTask\\NetCoreTask.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\denis\\.nuget\\packages\\fastexpressioncompiler\\3.3.4\\fastexpressioncompiler.3.3.4.nupkg.sha512",
     "C:\\Users\\denis\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\denis\\.nuget\\packages\\mapster\\7.4.0\\mapster.7.4.0.nupkg.sha512",
+    "C:\\Users\\denis\\.nuget\\packages\\mapster.core\\1.2.1\\mapster.core.1.2.1.nupkg.sha512",
     "C:\\Users\\denis\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\denis\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.2.0\\microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",
     "C:\\Users\\denis\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\6.0.0\\microsoft.aspnetcore.jsonpatch.6.0.0.nupkg.sha512",

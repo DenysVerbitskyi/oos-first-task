@@ -19,7 +19,7 @@ public class StudentEntity : IEntity
     public string LastName { get; set; }
 
     [Required]
-    public DateTimeOffset DateOfBirth { get; set; }
+    public DateTime DateOfBirth { get; set; }
 
     public virtual ICollection<StudentCoursesEntity> StudentCourses { get; set; }
 }

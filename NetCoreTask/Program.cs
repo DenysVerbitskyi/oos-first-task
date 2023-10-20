@@ -1,8 +1,15 @@
+using Mapster;
+
 using Microsoft.EntityFrameworkCore;
 
+using NetCoreTask.Client.Services;
 using NetCoreTask.DataBase;
-using NetCoreTask.DataBase.Repository;
+using NetCoreTask.DataBase.Entities;
 using NetCoreTask.DataBase.Repository.Abstract;
+using NetCoreTask.DataBase.Repository.Services;
+using NetCoreTask.Models;
+using NetCoreTask.Services;
+using NetCoreTask.Services.Abstractions;
 
 namespace NetCoreTask;
 
@@ -28,10 +35,15 @@ public class Program
         builder.Services.AddDbContext<UniversityDbContext>(config =>
             config.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
-        builder.Services.AddScoped<IStudentRepository, StudentsRepository>();
-        builder.Services.AddScoped<ITeacherRepository, TeacherRepository>();
-        builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+        builder.Services.AddScoped<IRepository<StudentEntity>, StudentsRepository>();
+        builder.Services.AddScoped<IRepository<TeacherEntity>, TeachersRepository>();
+        builder.Services.AddScoped<IRepository<CourseEntity>, CoursesRepository>();
 
+        builder.Services.AddScoped<IApiService<StudentDto>, StudentsService>();
+        builder.Services.AddScoped<IApiService<CourseDto>, CoursesService>();
+        builder.Services.AddScoped<IApiService<TeacherDto>, TeachersService>();
+
+        //builder.Services.AddSingleton<IDataMapper, DataMapper>();
 
         var app = builder.Build();
 

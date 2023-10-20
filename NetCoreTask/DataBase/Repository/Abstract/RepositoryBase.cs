@@ -16,39 +16,45 @@ namespace NetCoreTask.DataBase.Repository.Abstract
         }
         public async Task<TEntity> Add(TEntity entity)
         {
-            _dbSet.Add(entity);
-            await _context.SaveChangesAsync();
+            await _dbSet.AddAsync(entity).ConfigureAwait(false);
+            
+            await _context.SaveChangesAsync().ConfigureAwait(false);
             return entity;
         }
 
         public async Task<TEntity> Delete(int id)
         {
-            var entity = await _dbSet.FindAsync(id);
+            var entity = await _dbSet.FindAsync(id).ConfigureAwait(false);
             if (entity == null)
             {
-                return entity;
+                throw new ArgumentNullException();
             }
 
             _dbSet.Remove(entity);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync().ConfigureAwait(false);
 
             return entity;
         }
 
         public virtual async Task<TEntity> GetById(int id)
         {
-            return await _dbSet.FindAsync(id);
+            var entity = await _dbSet.FindAsync(id).ConfigureAwait(false);
+
+            return entity;
         }
 
         public virtual async Task<List<TEntity>> GetAll()
         {
-            return await _dbSet.ToListAsync();
+            var entities = await _dbSet.ToListAsync().ConfigureAwait(false);
+
+            return entities;
         }
 
         public async Task<TEntity> Update(TEntity entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync().ConfigureAwait(false);
+
             return entity;
         }
     }

@@ -1,13 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Mapster;
+
+using Microsoft.EntityFrameworkCore;
 using NetCoreTask.DataBase.Entities;
 using NetCoreTask.DataBase.Repository.Abstract;
+using NetCoreTask.Models;
 
-namespace NetCoreTask.DataBase.Repository;
+namespace NetCoreTask.DataBase.Repository.Services;
 
-public class CourseRepository : RepositoryBase<CourseEntity, UniversityDbContext>, ICourseRepository
+public class CoursesRepository : RepositoryBase<CourseEntity, UniversityDbContext>
 {
     private readonly UniversityDbContext _context;
-    public CourseRepository(UniversityDbContext context)
+    public CoursesRepository(UniversityDbContext context)
         : base(context)
     {
         _context = context;
@@ -18,7 +21,8 @@ public class CourseRepository : RepositoryBase<CourseEntity, UniversityDbContext
         return await _context.Courses
             .Include(c => c.Teacher)
             .AsNoTracking()
-            .FirstAsync(s => s.Id == id);
+            .FirstAsync(s => s.Id == id)
+            .ConfigureAwait(false);
     }
 
     public override async Task<List<CourseEntity>> GetAll()
@@ -26,6 +30,7 @@ public class CourseRepository : RepositoryBase<CourseEntity, UniversityDbContext
         return await _context.Courses
             .Include(c => c.Teacher)
             .AsNoTracking()
-            .ToListAsync();
+            .ToListAsync()
+            .ConfigureAwait(false);
     }
 }

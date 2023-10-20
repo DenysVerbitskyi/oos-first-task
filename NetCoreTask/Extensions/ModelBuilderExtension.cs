@@ -13,35 +13,35 @@ public static class ModelBuilderExtension
                 Id = 1,
                 FirstName = "Ivan",
                 LastName = "Petrenko",
-                DateOfBirth = new DateTimeOffset(new DateTime(1991, 01, 01))
+                DateOfBirth = new DateTime(1991, 01, 01)
             },
             new StudentEntity
             {
                 Id = 2,
                 FirstName = "Oles",
                 LastName = "Kurko",
-                DateOfBirth = new DateTimeOffset(new DateTime(1992, 02, 02))
+                DateOfBirth = new DateTime(1992, 02, 02)
             },
             new StudentEntity
             {
                 Id = 3,
                 FirstName = "Pavlo",
                 LastName = "Skoropadskiy",
-                DateOfBirth = new DateTimeOffset(new DateTime(1993, 03, 03))
+                DateOfBirth = new DateTime(1993, 03, 03)
             },
             new StudentEntity
             {
                 Id = 4,
                 FirstName = "Bohdan",
                 LastName = "Khmelnitskiy",
-                DateOfBirth = new DateTimeOffset(new DateTime(1994, 04, 04))
+                DateOfBirth = new DateTime(1994, 04, 04)
             },
             new StudentEntity
             {
                 Id = 5,
                 FirstName = "Ivan",
                 LastName = "Bohun",
-                DateOfBirth = new DateTimeOffset(new DateTime(1995, 05, 05))
+                DateOfBirth = new DateTime(1995, 05, 05)
             });
 
         builder.Entity<TeacherEntity>().HasData(

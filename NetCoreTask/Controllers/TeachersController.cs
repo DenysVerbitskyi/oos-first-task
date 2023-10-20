@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Mapster;
+
+using Microsoft.AspNetCore.Mvc;
 
 using NetCoreTask.DataBase.Entities;
 using NetCoreTask.DataBase.Repository.Abstract;
+using NetCoreTask.Models;
+using NetCoreTask.Services.Abstractions;
 
 namespace NetCoreTask.Controllers
 {
@@ -9,23 +13,36 @@ namespace NetCoreTask.Controllers
     [ApiController]
     public class TeachersController : ControllerBase
     {
-        private readonly ITeacherRepository _repository;
+        private readonly IApiService<TeacherDto> _service;
 
-        public TeachersController(ITeacherRepository repository)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TeachersController"/> class.
+        /// </summary>
+        /// <param name="service">Service for entity CRUD operations.</param>
+        public TeachersController(IApiService<TeacherDto> service)
         {
-            _repository = repository;
+            _service = service;
         }
 
+        /// <summary>
+        /// Get all teachers from the database.
+        /// </summary>
+        /// <returns>The result is a <see cref="IEnumerable{TeacherDto}"/> a list of teachers that were received.</returns>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TeacherEntity>>> GetTeachers()
+        public async Task<ActionResult<IEnumerable<TeacherDto>>> GetTeachers()
         {
-            return await _repository.GetAll();
+            return await _service.GetAll();
         }
 
+        /// <summary>
+        /// Get teacher by id.
+        /// </summary>
+        /// <param name="id">The teacher's id.</param>
+        /// <returns>The <see cref="TheacerDto"/> that was found or null.</returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult<TeacherEntity>> GetTeacherById(int id)
+        public async Task<ActionResult<TeacherDto>> GetTeacherById(int id)
         {
-            var teacher = await _repository.GetById(id);
+            var teacher = await _service.GetById(id);
             if (teacher == null)
             {
                 return NotFound();
@@ -33,35 +50,51 @@ namespace NetCoreTask.Controllers
             return Ok(teacher);
         }
 
+        /// <summary>
+        /// Update teacher's information in the database.
+        /// </summary>
+        /// <param name="teacher">Teacher entity to update.</param>
+        /// <param name="id">Teacher's Id.</param>
+        /// <returns>Action result</returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> EditTeacher(int id, TeacherEntity teacher)
+        public async Task<IActionResult> EditTeacher(int id, TeacherDto teacher)
         {
             if (id != teacher.Id)
             {
                 return BadRequest();
             }
 
-            await _repository.Update(teacher);
+            await _service.Update(teacher);
             return NoContent();
         }
 
+        /// <summary>
+        /// Method for creating a new teacher.
+        /// </summary>
+        /// <param name="teacher">Teacher entity to add.</param>
+        /// <returns>The teacher that was created.</returns>
         [HttpPost]
-        public async Task<ActionResult<TeacherEntity>> CreateTeacher(TeacherEntity teacher)
+        public async Task<ActionResult<TeacherDto>> CreateTeacher(TeacherDto teacher)
         {
-            await _repository.Add(teacher);
+            await _service.Add(teacher);
 
             return CreatedAtAction("Get", new { id = teacher.Id }, teacher);
         }
 
+        /// <summary>
+        /// Delete the teacher from the database.
+        /// </summary>
+        /// <param name="id">The teacher's id.</param>
+        /// <returns>If deletion was successful, the result will be Status Code 204.</returns>
         [HttpDelete("{id}")]
-        public async Task<ActionResult<TeacherEntity>> Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            var teacher = await _repository.Delete(id);
+            var teacher = await _service.Delete(id);
             if (teacher == null)
             {
-                return NotFound(teacher);
+                return NotFound();
             }
-            return Ok(teacher);
+            return Ok();
         }
     }
 }

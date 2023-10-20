@@ -2,6 +2,8 @@
 
 using NetCoreTask.DataBase.Entities;
 using NetCoreTask.DataBase.Repository.Abstract;
+using NetCoreTask.Models;
+using NetCoreTask.Services.Abstractions;
 
 namespace NetCoreTask.Controllers
 {
@@ -9,23 +11,36 @@ namespace NetCoreTask.Controllers
     [ApiController]
     public class CoursesController : ControllerBase
     {
-        private readonly ICourseRepository _repository;
+        private readonly IApiService<CourseDto> _service;
 
-        public CoursesController(ICourseRepository repository)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CoursesController"/> class.
+        /// </summary>
+        /// <param name="service">Service for entity CRUD operations.</param>
+        public CoursesController(IApiService<CourseDto> service)
         {
-            _repository = repository;
+            _service = service;
         }
 
+        /// <summary>
+        /// Get all courses from the database.
+        /// </summary>
+        /// <returns>The result is a <see cref="IEnumerable{CourseDto}"/> a list of courses that were received.</returns>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CourseEntity>>> GetCourses()
+        public async Task<ActionResult<IEnumerable<CourseDto>>> GetCourses()
         {
-            return await _repository.GetAll();
+            return await _service.GetAll();
         }
 
+        /// <summary>
+        /// Get course by id.
+        /// </summary>
+        /// <param name="id">The course's id.</param>
+        /// <returns>The <see cref="CourseDto"/> that was found or null.</returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult<CourseEntity>> GetCourseById(int id)
+        public async Task<ActionResult<CourseDto>> GetCourseById(int id)
         {
-            var course = await _repository.GetById(id);
+            var course = await _service.GetById(id);
             if (course == null)
             {
                 return NotFound();
@@ -33,30 +48,46 @@ namespace NetCoreTask.Controllers
             return Ok(course);
         }
 
+        /// <summary>
+        /// Update course's information in the database.
+        /// </summary>
+        /// <param name="course">Course entity to update.</param>
+        /// <param name="id">Course's Id.</param>
+        /// <returns>Action result</returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> EditCourse(int id, CourseEntity course)
+        public async Task<IActionResult> EditCourse(int id, CourseDto course)
         {
             if (id != course.Id)
             {
                 return BadRequest();
             }
 
-            await _repository.Update(course);
+            await _service.Update(course);
             return NoContent();
         }
 
+        /// <summary>
+        /// Method for creating a new course.
+        /// </summary>
+        /// <param name="course">Course entity to add.</param>
+        /// <returns>The course that was created.</returns>
         [HttpPost]
-        public async Task<ActionResult<CourseEntity>> CreateStudent(CourseEntity course)
+        public async Task<ActionResult<CourseDto>> CreateCourse(CourseDto course)
         {
-            await _repository.Add(course);
+            await _service.Add(course);
 
-            return CreatedAtAction("Get", new { id = course.Id }, course);
+            return CreatedAtAction("GetCourseById", new { id = course.Id }, course);
         }
 
+        /// <summary>
+        /// Delete the course from the database.
+        /// </summary>
+        /// <param name="id">The course's id.</param>
+        /// <returns>If deletion was successful, the result will be Status Code 204.</returns>
         [HttpDelete("{id}")]
-        public async Task<ActionResult<CourseEntity>> Delete(int id)
+        public async Task<ActionResult<CourseDto>> Delete(int id)
         {
-            var course = await _repository.Delete(id);
+            var course = await _service.Delete(id);
             if (course == null)
             {
                 return NotFound(course);

@@ -1,6 +1,11 @@
-﻿namespace NetCoreTask.Models
+﻿using NetCoreTask.Models.Abstractions;
+
+namespace NetCoreTask.Models;
+
+public class TeacherDto : IDto
 {
-    public class TeacherDto
-    {
-    }
+    public int Id { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string Email { get; set; }
 }
