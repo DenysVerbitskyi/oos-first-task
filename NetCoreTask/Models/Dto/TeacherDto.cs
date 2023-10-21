@@ -1,6 +1,6 @@
 ﻿using NetCoreTask.Models.Abstractions;
 
-namespace NetCoreTask.Models;
+namespace NetCoreTask.Models.Dto;
 
 public class TeacherDto : IDto
 {

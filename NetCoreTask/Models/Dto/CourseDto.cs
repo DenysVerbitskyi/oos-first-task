@@ -1,7 +1,7 @@
 ﻿using NetCoreTask.DataBase.Entities;
 using NetCoreTask.Models.Abstractions;
 
-namespace NetCoreTask.Models;
+namespace NetCoreTask.Models.Dto;
 
 public class CourseDto : IDto
 {

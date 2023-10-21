@@ -4,9 +4,11 @@ using NetCoreTask.DataBase;
 using NetCoreTask.DataBase.Entities;
 using NetCoreTask.DataBase.Repository.Abstract;
 using NetCoreTask.DataBase.Repository.Services;
-using NetCoreTask.Models;
+using NetCoreTask.Models.Dto;
 using NetCoreTask.Services;
 using NetCoreTask.Services.Abstractions;
+
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace NetCoreTask;
 
@@ -48,7 +50,13 @@ public class Program
         if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
-            app.UseSwaggerUI();
+            app.UseSwaggerUI(c =>
+            {
+                c.ConfigObject = new ConfigObject
+                {
+                    ShowCommonExtensions = true
+                };
+            });
         }
 
         app.UseHttpsRedirection();

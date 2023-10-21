@@ -5,7 +5,7 @@ using Mapster;
 using MapsterMapper;
 
 using NetCoreTask.DataBase.Entities;
-using NetCoreTask.Models;
+using NetCoreTask.Models.Dto;
 using NetCoreTask.Services.Abstractions;
 
 namespace NetCoreTask.Client.Services;

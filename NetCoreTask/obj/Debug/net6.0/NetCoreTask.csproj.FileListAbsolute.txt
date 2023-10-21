@@ -113,3 +113,4 @@ C:\Users\denis\source\repos\oos-first-task\NetCoreTask\bin\Debug\net6.0\Newtonso
 C:\Users\denis\source\repos\oos-first-task\NetCoreTask\bin\Debug\net6.0\Mapster.dll
 C:\Users\denis\source\repos\oos-first-task\NetCoreTask\bin\Debug\net6.0\Mapster.Core.dll
 C:\Users\denis\source\repos\oos-first-task\NetCoreTask\bin\Debug\net6.0\FastExpressionCompiler.dll
+C:\Users\denis\source\repos\oos-first-task\NetCoreTask\bin\Debug\net6.0\FluentValidation.dll
