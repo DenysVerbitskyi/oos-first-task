@@ -16,5 +16,5 @@ public class CourseEntity : IEntity
     public Guid TeacherId { get; set; }
 
     public virtual TeacherEntity Teacher { get; set; }
-    public virtual ICollection<StudentCoursesEntity> StudentCourses { get; set; }
+    public virtual ICollection<StudentEntity> Students { get; set; }
 }

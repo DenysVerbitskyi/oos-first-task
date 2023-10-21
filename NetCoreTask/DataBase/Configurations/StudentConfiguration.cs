@@ -11,5 +11,8 @@ public class StudentConfiguration : IEntityTypeConfiguration<StudentEntity>
         builder.ToTable("Students");
 
         builder.HasKey(s => s.Id);
+
+        builder.HasMany(c => c.Courses)
+            .WithMany(c => c.Students);
     }
 }
