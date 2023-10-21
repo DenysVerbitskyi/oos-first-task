@@ -15,7 +15,7 @@ public class UniversityDbContext : DbContext
     public DbSet<StudentEntity> Students { get; set; }
     public DbSet<TeacherEntity> Theachers { get; set; }
     public DbSet<CourseEntity> Courses { get; set; }
-    public DbSet<StudentCoursesEntity> StudentCourses { get; set; }
+    //public DbSet<StudentCoursesEntity> StudentCourses { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
