@@ -15,5 +15,5 @@ public class StudentEntity : IEntity
 
     public DateTime DateOfBirth { get; set; }
 
-    public virtual ICollection<StudentCoursesEntity> StudentCourses { get; set; }
+    public virtual ICollection<CourseEntity> Courses { get; set; }
 }
