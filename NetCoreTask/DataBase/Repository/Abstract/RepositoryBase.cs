@@ -14,6 +14,7 @@ namespace NetCoreTask.DataBase.Repository.Abstract
             _context = context;
             _dbSet = _context.Set<TEntity>();
         }
+
         public async Task<TEntity> Add(TEntity entity)
         {
             await _dbSet.AddAsync(entity).ConfigureAwait(false);
