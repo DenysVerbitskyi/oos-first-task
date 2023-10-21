@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Mapster;
 
-using NetCoreTask.Models;
+using Microsoft.AspNetCore.Mvc;
+
+using NetCoreTask.Models.Domain;
+using NetCoreTask.Models.Dto;
 using NetCoreTask.Services.Abstractions;
 
 namespace NetCoreTask.Controllers
@@ -25,9 +28,11 @@ namespace NetCoreTask.Controllers
         /// </summary>
         /// <returns>The result is a <see cref="IEnumerable{StudentDto}"/> a list of students that were received.</returns>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<StudentDto>>> GetStudents()
+        public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
         {
-            return await _service.GetAll();
+            var studentsDto = await _service.GetAll();
+
+            return studentsDto.Adapt<List<Student>>();
         }
 
         /// <summary>
@@ -36,14 +41,14 @@ namespace NetCoreTask.Controllers
         /// <param name="id">The student's id.</param>
         /// <returns>The <see cref="StudentDto"/> that was found or null.</returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult<StudentDto>> GetStudentById(Guid id)
+        public async Task<ActionResult<Student>> GetStudentById(Guid id)
         {
             var student = await _service.GetById(id);
             if (student == null)
             {
                 return NotFound();
             }
-            return Ok(student);
+            return Ok(student.Adapt<Student>());
         }
 
         /// <summary>
@@ -53,14 +58,12 @@ namespace NetCoreTask.Controllers
         /// <param name="id">Student's Id.</param>
         /// <returns>Action result</returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> EditStudent(Guid id, StudentDto student)
+        public async Task<IActionResult> EditStudent(Guid id, Student student)
         {
-            if (id != student.Id)
-            {
-                return BadRequest();
-            }
+            var studentDto = student.Adapt<StudentDto>();
+            studentDto.Id = id;
 
-            await _service.Update(student);
+            await _service.Update(studentDto);
             return NoContent();
         }
 
@@ -70,11 +73,13 @@ namespace NetCoreTask.Controllers
         /// <param name="student">Student entity to add.</param>
         /// <returns>The student that was created.</returns>
         [HttpPost]
-        public async Task<ActionResult<StudentDto>> CreateStudent(StudentDto student)
+        public async Task<ActionResult<Student>> CreateStudent(Student student)
         {
-            await _service.Add(student);
+            var studentDto = student.Adapt<StudentDto>();
 
-            return CreatedAtAction("Get", new { id = student.Id }, student);
+            await _service.Add(studentDto);
+
+            return CreatedAtAction("GetStudentById", new { id = studentDto.Id }, student);
         }
 
         /// <summary>
@@ -83,14 +88,14 @@ namespace NetCoreTask.Controllers
         /// <param name="id">The student's id.</param>
         /// <returns>If deletion was successful, the result will be Status Code 204.</returns>
         [HttpDelete("{id}")]
-        public async Task<ActionResult<StudentDto>> Delete(Guid id)
+        public async Task<ActionResult<Student>> Delete(Guid id)
         {
             var student = await _service.Delete(id);
             if (student == null)
             {
                 return NotFound(student);
             }
-            return Ok(student);
+            return Ok(student.Adapt<Student>());
         }
     }
 }

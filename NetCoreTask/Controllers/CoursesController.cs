@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Mapster;
 
-using NetCoreTask.Models;
+using Microsoft.AspNetCore.Mvc;
+
+using NetCoreTask.Models.Domain;
+using NetCoreTask.Models.Dto;
 using NetCoreTask.Services.Abstractions;
 
 namespace NetCoreTask.Controllers
@@ -23,27 +26,29 @@ namespace NetCoreTask.Controllers
         /// <summary>
         /// Get all courses from the database.
         /// </summary>
-        /// <returns>The result is a <see cref="IEnumerable{CourseDto}"/> a list of courses that were received.</returns>
+        /// <returns>The result is a <see cref="IEnumerable{Course}"/> a list of courses that were received.</returns>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CourseDto>>> GetCourses()
+        public async Task<ActionResult<IEnumerable<Course>>> GetCourses()
         {
-            return await _service.GetAll();
+            var coursesDto = await _service.GetAll();
+
+            return coursesDto.Adapt<List<Course>>();
         }
 
         /// <summary>
         /// Get course by id.
         /// </summary>
         /// <param name="id">The course's id.</param>
-        /// <returns>The <see cref="CourseDto"/> that was found or null.</returns>
+        /// <returns>The <see cref="Course"/> that was found or null.</returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult<CourseDto>> GetCourseById(Guid id)
+        public async Task<ActionResult<Course>> GetCourseById(Guid id)
         {
             var course = await _service.GetById(id);
             if (course == null)
             {
                 return NotFound();
             }
-            return Ok(course);
+            return Ok(course.Adapt<Course>());
         }
 
         /// <summary>
@@ -53,14 +58,13 @@ namespace NetCoreTask.Controllers
         /// <param name="id">Course's Id.</param>
         /// <returns>Action result</returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> EditCourse(Guid id, CourseDto course)
+        public async Task<IActionResult> EditCourse(Guid id, Course course)
         {
-            if (id != course.Id)
-            {
-                return BadRequest();
-            }
+            var courseDto = course.Adapt<CourseDto>();
+            courseDto.Id = id;
 
-            await _service.Update(course);
+            await _service.Update(courseDto);
+
             return NoContent();
         }
 
@@ -70,11 +74,13 @@ namespace NetCoreTask.Controllers
         /// <param name="course">Course entity to add.</param>
         /// <returns>The course that was created.</returns>
         [HttpPost]
-        public async Task<ActionResult<CourseDto>> CreateCourse(CourseDto course)
+        public async Task<ActionResult<Course>> CreateCourse(Course course)
         {
-            await _service.Add(course);
+            var courseDto = course.Adapt<CourseDto>();
 
-            return CreatedAtAction("GetCourseById", new { id = course.Id }, course);
+            await _service.Add(courseDto);
+
+            return CreatedAtAction("GetCourseById", new { id = courseDto.Id }, courseDto);
         }
 
         /// <summary>
@@ -83,14 +89,14 @@ namespace NetCoreTask.Controllers
         /// <param name="id">The course's id.</param>
         /// <returns>If deletion was successful, the result will be Status Code 204.</returns>
         [HttpDelete("{id}")]
-        public async Task<ActionResult<CourseDto>> Delete(Guid id)
+        public async Task<ActionResult<Course>> Delete(Guid id)
         {
             var course = await _service.Delete(id);
             if (course == null)
             {
                 return NotFound(course);
             }
-            return Ok(course);
+            return Ok(course.Adapt<Course>());
         }
     }
 }

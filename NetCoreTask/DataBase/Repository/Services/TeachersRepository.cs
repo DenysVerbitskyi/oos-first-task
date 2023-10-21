@@ -16,21 +16,17 @@ public class TeachersRepository : RepositoryBase<TeacherEntity, UniversityDbCont
 
     public override async Task<TeacherEntity> GetById(Guid id)
     {
-        var teacher = await _context.Theachers
+        return await _context.Theachers
             .AsNoTracking()
             .FirstAsync(s => s.Id == id)
             .ConfigureAwait(false);
-        
-        return teacher;
     }
 
     public override async Task<List<TeacherEntity>> GetAll()
     {
-        var teachers = await _context.Theachers
+        return await _context.Theachers
             .AsNoTracking()
             .ToListAsync()
             .ConfigureAwait(false);
-
-        return teachers;
     }
 }

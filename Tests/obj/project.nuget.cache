@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "dgSpecHash": "CmUqMJdyI71tvCQXKct+oPmQHkeUK0SC2gR2rfc+smxbDkiZtHFw68+vvoYQHzw2D5eipSIZ1Nh/mbUIINm5rQ==",
   "dgSpecHash": "3cVhprbSW/ek73s9AAb3aZAJJxRSAgWyBUmmiG2AWn061bytyXFGUGfrA3skyt1XvENVipySmrcoJSzFBqAl+Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\denis\\source\\repos\\oos-first-task\\Tests\\Tests.csproj",
@@ -7,6 +8,7 @@
     "C:\\Users\\denis\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",
     "C:\\Users\\denis\\.nuget\\packages\\coverlet.collector\\3.2.0\\coverlet.collector.3.2.0.nupkg.sha512",
     "C:\\Users\\denis\\.nuget\\packages\\fastexpressioncompiler\\3.3.4\\fastexpressioncompiler.3.3.4.nupkg.sha512",
+    "C:\\Users\\denis\\.nuget\\packages\\fluentvalidation\\11.8.0\\fluentvalidation.11.8.0.nupkg.sha512",
     "C:\\Users\\denis\\.nuget\\packages\\mapster\\7.4.0\\mapster.7.4.0.nupkg.sha512",
     "C:\\Users\\denis\\.nuget\\packages\\mapster.core\\1.2.1\\mapster.core.1.2.1.nupkg.sha512",
     "C:\\Users\\denis\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",

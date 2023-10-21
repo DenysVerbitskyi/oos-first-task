@@ -6,7 +6,6 @@ namespace NetCoreTask.DataBase.Entities;
 
 public class StudentCoursesEntity : IEntity
 {
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public Guid Id { get; set; }
     public Guid StudentId { get; set; }
     public Guid CourseId { get; set; }
