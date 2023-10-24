@@ -75,7 +75,7 @@ namespace NetCoreTask.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "CourseEntityStudentEntity",
+                name: "CoursesStudents",
                 columns: table => new
                 {
                     CoursesId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
@@ -83,15 +83,15 @@ namespace NetCoreTask.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CourseEntityStudentEntity", x => new { x.CoursesId, x.StudentsId });
+                    table.PrimaryKey("PK_CoursesStudents", x => new { x.CoursesId, x.StudentsId });
                     table.ForeignKey(
-                        name: "FK_CourseEntityStudentEntity_Courses_CoursesId",
+                        name: "FK_CoursesStudents_Courses_CoursesId",
                         column: x => x.CoursesId,
                         principalTable: "Courses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CourseEntityStudentEntity_Students_StudentsId",
+                        name: "FK_CoursesStudents_Students_StudentsId",
                         column: x => x.StudentsId,
                         principalTable: "Students",
                         principalColumn: "Id",
@@ -136,8 +136,8 @@ namespace NetCoreTask.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CourseEntityStudentEntity_StudentsId",
-                table: "CourseEntityStudentEntity",
+                name: "IX_CoursesStudents_StudentsId",
+                table: "CoursesStudents",
                 column: "StudentsId");
 
             migrationBuilder.CreateIndex(
@@ -150,7 +150,7 @@ namespace NetCoreTask.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CourseEntityStudentEntity");
+                name: "CoursesStudents");
 
             migrationBuilder.DropTable(
                 name: "Courses");

@@ -29,51 +29,51 @@ public abstract class ApiService<TEntity, TDto> : IApiService<TDto>
     {
         _logger.LogDebug($"Started creation of a new {_entityName}");
         
-        var course = await RequestDataAsync(_repository.Add(dto.Adapt<TEntity>()));
+        var entity = await RequestDataAsync(_repository.Add(dto.Adapt<TEntity>()));
 
         _logger.LogDebug($"{_entityName} with id:{dto.Id} was created.");
 
-        return course.Adapt<TDto>();
+        return entity.Adapt<TDto>();
     }
 
     public virtual async Task<TDto> Delete(Guid id)
     {
         _logger.LogDebug($"Started deleting {_entityName} with id:{id}");
 
-        var course = await RequestDataAsync(_repository.Delete(id));
+        var entity = await RequestDataAsync(_repository.Delete(id));
 
         _logger.LogDebug($"Deleting {_entityName} with id:{id} was successfully");
 
-        return course.Adapt<TDto>();
+        return entity.Adapt<TDto>();
     }
 
     public virtual async Task<List<TDto>> GetAll()
     {
         _logger.LogDebug($"Started getting all {_entityName}'s from database");
 
-        var courses = await RequestDataAsync(_repository.GetAll());
+        var entities = await RequestDataAsync(_repository.GetAll());
         
         _logger.LogDebug($"All {_entityName}'s were successfully getted.");
 
-        return courses.Adapt<List<TDto>>();
+        return entities.Adapt<List<TDto>>();
     }
 
     public virtual async Task<TDto> GetById(Guid id)
     {
         _logger.LogDebug($"Started getting {_entityName} with id:{id} from database");
 
-        var course = await RequestDataAsync(_repository.GetById(id));
+        var entity = await RequestDataAsync(_repository.GetById(id));
 
         _logger.LogDebug($"{_entityName} with id:{id} was successfully getted");
 
-        return course.Adapt<TDto>();
+        return entity.Adapt<TDto>();
     }
 
-    public virtual async Task<TDto> Update(TDto entity)
+    public virtual async Task<TDto> Update(TDto dto)
     {
-        var course = await RequestDataAsync(_repository.Update(entity.Adapt<TEntity>()));
+        var entity = await RequestDataAsync(_repository.Update(dto.Adapt<TEntity>()));
 
-        return course.Adapt<TDto>();
+        return entity.Adapt<TDto>();
     }
 
     private async Task<T> RequestDataAsync<T>(Task<T> task, [CallerMemberName] string? name = null)

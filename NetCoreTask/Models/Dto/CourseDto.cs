@@ -1,5 +1,4 @@
-﻿using NetCoreTask.DataBase.Entities;
-using NetCoreTask.Models.Abstractions;
+﻿using NetCoreTask.Models.Abstractions;
 
 namespace NetCoreTask.Models.Dto;
 

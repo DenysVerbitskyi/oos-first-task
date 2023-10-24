@@ -7,7 +7,7 @@ public class Course
     [Required(ErrorMessage = "Course name is required")]
     [DataType(DataType.Text)]
     [MaxLength(120)]
-    [MinLength(1)]
+    [MinLength(2, ErrorMessage = "Course Name must be a minimum length of '2'.")]
     public string CourseName { get; set; }
 
     [Required(ErrorMessage = "Description is required")]
@@ -15,6 +15,6 @@ public class Course
     [MinLength(1)]
     public string Description { get; set; }
 
-    [Required(ErrorMessage = "Guid is required")]
+    [Required(ErrorMessage = "The TeacherId field is required.")]
     public Guid TeacherId { get; set; }
 }
